@@ -43,8 +43,8 @@ class RootResponse(BaseModel):
 
 app = FastAPI(
     title="Skin Disease Classification API",
-    description="API for classifying skin diseases using EfficientNetV2 model",
-    version="2.0.0"
+    description="API for classifying skin diseases using ensemble of EfficientNetV2 and VGG16 models",
+    version="2.1.0"
 )
 
 app.add_middleware(
@@ -56,33 +56,48 @@ app.add_middleware(
 )
 
 
-model: Optional[tf.keras.Model] = None
+model_efficientnet: Optional[tf.keras.Model] = None
+model_vgg16: Optional[tf.keras.Model] = None
 class_index: Optional[dict] = None
 index_class: Optional[dict] = None
 
 @app.on_event("startup")
 async def load_model_and_mappings():
-    """Load model and class mappings on startup"""
-    global model, class_index, index_class
+    """Load both models and class mappings on startup"""
+    global model_efficientnet, model_vgg16, class_index, index_class
     
     try:
         logger.info("Starting model loading...")
         
-    
-        model = tf.keras.models.load_model(
+        # Load EfficientNet model
+        model_efficientnet = tf.keras.models.load_model(
             'resultsskinwise/efficientnet_final.keras',
             compile=False  
         )
- 
-        model.compile(
+        model_efficientnet.compile(
             optimizer='adam',
             loss='categorical_crossentropy',
             metrics=['accuracy']
         )
-        
         logger.info("✅ EfficientNet model loaded successfully!")
         
+        # Load VGG16 model
+        try:
+            model_vgg16 = tf.keras.models.load_model(
+                'final_model2.keras',
+                compile=False  
+            )
+            model_vgg16.compile(
+                optimizer='adam',
+                loss='categorical_crossentropy',
+                metrics=['accuracy']
+            )
+            logger.info("✅ VGG16 model loaded successfully!")
+        except Exception as vgg_error:
+            logger.warning(f"⚠️ VGG16 model not available: {str(vgg_error)}. Using EfficientNet only.")
+            model_vgg16 = None
 
+        # Load class mappings
         try:
             with open('resultsskinwise/class_index.pkl', 'rb') as f:
                 class_index = pickle.load(f)
@@ -98,27 +113,24 @@ async def load_model_and_mappings():
         gc.collect()
         
     except Exception as e:
-        logger.error(f"❌ Error loading model or mappings: {str(e)}")
-        model = None
+        logger.error(f"❌ Error loading models or mappings: {str(e)}")
+        model_efficientnet = None
+        model_vgg16 = None
         class_index = None
         index_class = None
 
-def preprocess_image(image_file) -> np.ndarray:
-
+def preprocess_image(image_file, model_type='efficientnet'):
+    """Preprocess image for specific model type"""
     try:
-     
         image = Image.open(io.BytesIO(image_file)).convert('RGB')
-        
- 
         image = image.resize((224, 224))
-     
         img_array = np.array(image, dtype=np.float32)
-        
- 
         img_batch = np.expand_dims(img_array, axis=0)
         
-    
-        img_preprocessed = tf.keras.applications.efficientnet_v2.preprocess_input(img_batch)
+        if model_type == 'efficientnet':
+            img_preprocessed = tf.keras.applications.efficientnet_v2.preprocess_input(img_batch)
+        else:  # vgg16
+            img_preprocessed = tf.keras.applications.vgg16.preprocess_input(img_batch)
         
         return img_preprocessed
         
@@ -128,9 +140,12 @@ def preprocess_image(image_file) -> np.ndarray:
 
 @app.post("/predict", response_model=PredictionResponse)
 async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionResponse:
+    """
+    Ensemble prediction combining EfficientNet and VGG16 models
+    Returns top 3 predictions with averaged confidence scores
+    """
     
-    
-    if model is None:
+    if model_efficientnet is None:
         raise HTTPException(status_code=503, detail="Model not loaded. Please try again later.")
     
     if not file.content_type or not file.content_type.startswith("image/"):
@@ -140,22 +155,34 @@ async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionRespon
         raise HTTPException(status_code=400, detail="File too large. Maximum size is 10MB")
     
     try:
-
         image_data = await file.read()
-        preprocessed_image = preprocess_image(image_data)
-
-        predictions = model.predict(preprocessed_image, verbose=0)
         
-
-        predicted_index = np.argmax(predictions[0])
+        # Get predictions from EfficientNet
+        preprocessed_efficient = preprocess_image(image_data, 'efficientnet')
+        predictions_efficient = model_efficientnet.predict(preprocessed_efficient, verbose=0)[0]
+        
+        # Ensemble: Average predictions if VGG16 is available
+        if model_vgg16 is not None:
+            preprocessed_vgg = preprocess_image(image_data, 'vgg16')
+            predictions_vgg = model_vgg16.predict(preprocessed_vgg, verbose=0)[0]
+            # Average the predictions from both models
+            predictions = (predictions_efficient + predictions_vgg) / 2.0
+            logger.info("Using ensemble of EfficientNet + VGG16")
+        else:
+            predictions = predictions_efficient
+            logger.info("Using EfficientNet only")
+        
+        # Get top prediction
+        predicted_index = np.argmax(predictions)
         predicted_class = index_class[predicted_index]
-        confidence = float(np.max(predictions[0]))
+        confidence = float(np.max(predictions))
   
-        top_3_indices = np.argsort(predictions[0])[-3:][::-1]
+        # Get top 3 predictions
+        top_3_indices = np.argsort(predictions)[-3:][::-1]
         top_3_predictions = [
             PredictionResult(
                 class_name=index_class[idx],
-                confidence=float(predictions[0][idx])
+                confidence=float(predictions[idx])
             )
             for idx in top_3_indices
         ]
@@ -175,9 +202,10 @@ async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionRespon
 @app.get("/health", response_model=HealthResponse)
 async def health_check() -> HealthResponse:
     """Health check endpoint"""
+    models_loaded = model_efficientnet is not None
     return HealthResponse(
-        status="healthy" if model is not None else "model_not_loaded",
-        model_loaded=model is not None,
+        status="healthy" if models_loaded else "model_not_loaded",
+        model_loaded=models_loaded,
         available_classes=list(class_index.keys()) if class_index else []
     )
 
@@ -195,11 +223,14 @@ async def root() -> RootResponse:
 
 @app.on_event("shutdown")
 async def shutdown_event():
- 
-    global model
-    if model is not None:
-        del model
-        model = None
+    """Clean up models on shutdown"""
+    global model_efficientnet, model_vgg16
+    if model_efficientnet is not None:
+        del model_efficientnet
+        model_efficientnet = None
+    if model_vgg16 is not None:
+        del model_vgg16
+        model_vgg16 = None
     gc.collect()
     logger.info("Application shutdown complete")
 
