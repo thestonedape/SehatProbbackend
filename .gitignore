@@ -16,9 +16,11 @@ ENV/
 env.bak/
 venv.bak/
 
-# Old/Unused Models (keep only what's needed for deployment)
-final_model2.keras
-# Note: We keep resultsskinwise/efficientnet_final.keras and resultsskinwise/class_index.pkl
+# Old/Unused Models
+# Note: We keep both models for ensemble:
+# - resultsskinwise/efficientnet_final.keras
+# - final_model2.keras (VGG16)
+# - resultsskinwise/class_index.pkl
 
 # Training Results & Plots
 *.png
