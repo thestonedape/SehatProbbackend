@@ -16,24 +16,18 @@ ENV/
 env.bak/
 venv.bak/
 
-# Model Files (Large - should be stored separately)
-*.keras
-*.h5
-*.pkl
-*.pickle
-*.pt
-*.pth
-*.onnx
-*.pb
+# Old/Unused Models (keep only what's needed for deployment)
+final_model2.keras
+# Note: We keep resultsskinwise/efficientnet_final.keras and resultsskinwise/class_index.pkl
 
 # Training Results & Plots
 *.png
 *.jpg
 *.jpeg
-confusion_matrix.*
-training_*.png
-resultsskinwise/
-__results___files/
+resultsskinwise/*.png
+resultsskinwise/__results___files/
+resultsskinwise/efficientnet_phase1.keras
+resultsskinwise/efficientnet_phase2.keras
 
 # IDE
 .vscode/
