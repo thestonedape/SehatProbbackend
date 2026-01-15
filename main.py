@@ -23,14 +23,55 @@ tf.config.threading.set_intra_op_parallelism_threads(1)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Clinical Risk Configuration
+HIGH_RISK_CONDITIONS = {
+    'melanoma', 'melanocytic', 'basal cell carcinoma', 'squamous cell carcinoma',
+    'malignant', 'carcinoma', 'cancerous'
+}
+
+MEDIUM_RISK_CONDITIONS = {
+    'actinic keratosis', 'dermatofibroma', 'vascular lesion', 'pigmented benign keratosis'
+}
+
+def get_risk_level(class_name: str) -> str:
+    """Determine clinical risk level based on condition name"""
+    class_lower = class_name.lower()
+    if any(risk in class_lower for risk in HIGH_RISK_CONDITIONS):
+        return 'high'
+    elif any(risk in class_lower for risk in MEDIUM_RISK_CONDITIONS):
+        return 'medium'
+    return 'low'
+
+def get_clinical_priority(class_name: str, confidence: float) -> int:
+    """Calculate clinical priority (lower = more urgent)"""
+    risk_level = get_risk_level(class_name)
+    
+    # Base priority on risk level
+    if risk_level == 'high':
+        base_priority = 1
+    elif risk_level == 'medium':
+        base_priority = 50
+    else:
+        base_priority = 100
+    
+    # Adjust by confidence (inverse relationship)
+    # High confidence + high risk = lowest priority number (most urgent)
+    priority = base_priority - int(confidence * 30)
+    
+    return max(1, priority)  # Ensure minimum priority of 1
+
 class PredictionResult(BaseModel):
     class_name: str
     confidence: float
+    risk_level: str  # 'high', 'medium', 'low'
+    clinical_priority: int  # Lower = higher priority
 
 class PredictionResponse(BaseModel):
     predicted_class: str
     confidence: float
     all_predictions: List[PredictionResult]
+    medical_warning: Optional[str] = None
+    requires_urgent_evaluation: bool = False
 
 class HealthResponse(BaseModel):
     status: str
@@ -172,27 +213,89 @@ async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionRespon
             predictions = predictions_efficient
             logger.info("Using EfficientNet only")
         
-        # Get top prediction
+        # Get top prediction based on raw confidence
         predicted_index = np.argmax(predictions)
         predicted_class = index_class[predicted_index]
         confidence = float(np.max(predictions))
   
-        # Get top 3 predictions
-        top_3_indices = np.argsort(predictions)[-3:][::-1]
+        # Get top 5 predictions for clinical analysis
+        top_5_indices = np.argsort(predictions)[-5:][::-1]
+        
+        # Create predictions with risk levels and clinical priority
+        all_predictions_with_risk = []
+        high_risk_detected = False
+        highest_risk_condition = None
+        highest_risk_confidence = 0.0
+        
+        for idx in top_5_indices:
+            class_name = index_class[idx]
+            conf = float(predictions[idx])
+            risk_level = get_risk_level(class_name)
+            priority = get_clinical_priority(class_name, conf)
+            
+            all_predictions_with_risk.append({
+                'class_name': class_name,
+                'confidence': conf,
+                'risk_level': risk_level,
+                'priority': priority
+            })
+            
+            # Track high-risk conditions
+            if risk_level == 'high':
+                high_risk_detected = True
+                # If high-risk condition has confidence > 15%, consider it significant
+                if conf > 0.15 and conf > highest_risk_confidence:
+                    highest_risk_condition = class_name
+                    highest_risk_confidence = conf
+        
+        # Sort by clinical priority (lower = more urgent)
+        all_predictions_with_risk.sort(key=lambda x: (x['priority'], -x['confidence']))
+        
+        # Take top 3 by clinical priority
         top_3_predictions = [
             PredictionResult(
-                class_name=index_class[idx],
-                confidence=float(predictions[idx])
+                class_name=pred['class_name'],
+                confidence=pred['confidence'],
+                risk_level=pred['risk_level'],
+                clinical_priority=pred['priority']
             )
-            for idx in top_3_indices
+            for pred in all_predictions_with_risk[:3]
         ]
         
-        logger.info(f"Prediction made: {predicted_class} with confidence {confidence:.4f}")
+        # Use the clinically prioritized top prediction
+        final_predicted_class = top_3_predictions[0].class_name
+        final_confidence = top_3_predictions[0].confidence
+        
+        # Generate medical warning if needed
+        medical_warning = None
+        requires_urgent_evaluation = False
+        
+        if high_risk_detected and highest_risk_condition:
+            requires_urgent_evaluation = True
+            confidence_diff = confidence - highest_risk_confidence
+            
+            if confidence_diff < 0.05:  # Less than 5% difference
+                medical_warning = (
+                    f"⚠️ URGENT: High-risk condition '{highest_risk_condition}' detected with {highest_risk_confidence*100:.1f}% confidence. "
+                    f"This is clinically close to the top prediction. Immediate dermatologist evaluation recommended, "
+                    f"especially if lesion shows: bleeding, non-healing, irregular borders, or rapid changes."
+                )
+            elif highest_risk_confidence > 0.20:  # More than 20% confidence for high-risk
+                medical_warning = (
+                    f"⚠️ CAUTION: Potential serious condition '{highest_risk_condition}' detected ({highest_risk_confidence*100:.1f}% confidence). "
+                    f"Professional medical evaluation strongly recommended to rule out malignancy."
+                )
+        
+        logger.info(f"Clinical priority prediction: {final_predicted_class} with confidence {final_confidence:.4f}")
+        if medical_warning:
+            logger.warning(medical_warning)
         
         return PredictionResponse(
-            predicted_class=predicted_class,
-            confidence=confidence,
-            all_predictions=top_3_predictions
+            predicted_class=final_predicted_class,
+            confidence=final_confidence,
+            all_predictions=top_3_predictions,
+            medical_warning=medical_warning,
+            requires_urgent_evaluation=requires_urgent_evaluation
         )
         
     except Exception as e:
