@@ -42,23 +42,34 @@ def get_risk_level(class_name: str) -> str:
         return 'medium'
     return 'low'
 
-def get_clinical_priority(class_name: str, confidence: float) -> int:
-    """Calculate clinical priority (lower = more urgent)"""
-    risk_level = get_risk_level(class_name)
+def should_prioritize_high_risk(top_confidence: float, high_risk_confidence: float) -> bool:
+    """
+    Determine if high-risk condition should be prioritized over top prediction.
+    Only prioritize when high-risk is competitive with top prediction.
+    """
+    confidence_gap = top_confidence - high_risk_confidence
     
-    # Base priority on risk level
-    if risk_level == 'high':
-        base_priority = 1
-    elif risk_level == 'medium':
-        base_priority = 50
-    else:
-        base_priority = 100
+    # Rule 1: If top prediction is very confident (>50%) and gap is large (>15%), don't override
+    if top_confidence > 0.50 and confidence_gap > 0.15:
+        return False
     
-    # Adjust by confidence (inverse relationship)
-    # High confidence + high risk = lowest priority number (most urgent)
-    priority = base_priority - int(confidence * 30)
+    # Rule 2: If top is confident (>40%) and gap is >20%, don't override
+    if top_confidence > 0.40 and confidence_gap > 0.20:
+        return False
     
-    return max(1, priority)  # Ensure minimum priority of 1
+    # Rule 3: High-risk must be at least 20% to be considered
+    if high_risk_confidence < 0.20:
+        return False
+    
+    # Rule 4: If gap is very small (<10%), always prioritize high-risk
+    if confidence_gap < 0.10:
+        return True
+    
+    # Rule 5: If gap is moderate (10-15%) and both are >25%, consider it competitive
+    if confidence_gap < 0.15 and high_risk_confidence > 0.25:
+        return True
+    
+    return False
 
 class PredictionResult(BaseModel):
     class_name: str
@@ -231,38 +242,47 @@ async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionRespon
             class_name = index_class[idx]
             conf = float(predictions[idx])
             risk_level = get_risk_level(class_name)
-            priority = get_clinical_priority(class_name, conf)
             
             all_predictions_with_risk.append({
                 'class_name': class_name,
                 'confidence': conf,
-                'risk_level': risk_level,
-                'priority': priority
+                'risk_level': risk_level
             })
             
             # Track high-risk conditions
-            if risk_level == 'high':
+            if risk_level == 'high' and conf > highest_risk_confidence:
                 high_risk_detected = True
-                # If high-risk condition has confidence > 15%, consider it significant
-                if conf > 0.15 and conf > highest_risk_confidence:
-                    highest_risk_condition = class_name
-                    highest_risk_confidence = conf
+                highest_risk_condition = class_name
+                highest_risk_confidence = conf
         
-        # Sort by clinical priority (lower = more urgent)
-        all_predictions_with_risk.sort(key=lambda x: (x['priority'], -x['confidence']))
+        # Decide whether to prioritize high-risk condition
+        use_clinical_priority = False
+        if high_risk_detected and highest_risk_condition:
+            use_clinical_priority = should_prioritize_high_risk(confidence, highest_risk_confidence)
         
-        # Take top 3 by clinical priority
+        # Sort results
+        if use_clinical_priority:
+            # Sort by: high-risk first, then by confidence
+            all_predictions_with_risk.sort(
+                key=lambda x: (0 if x['risk_level'] == 'high' else 1, -x['confidence'])
+            )
+            logger.info(f"Clinical prioritization: Moving '{highest_risk_condition}' to top due to competitive confidence")
+        else:
+            # Normal sort by confidence only
+            all_predictions_with_risk.sort(key=lambda x: -x['confidence'])
+        
+        # Take top 3
         top_3_predictions = [
             PredictionResult(
                 class_name=pred['class_name'],
                 confidence=pred['confidence'],
                 risk_level=pred['risk_level'],
-                clinical_priority=pred['priority']
+                clinical_priority=idx + 1
             )
-            for pred in all_predictions_with_risk[:3]
+            for idx, pred in enumerate(all_predictions_with_risk[:3])
         ]
         
-        # Use the clinically prioritized top prediction
+        # Use the final top prediction
         final_predicted_class = top_3_predictions[0].class_name
         final_confidence = top_3_predictions[0].confidence
         
@@ -271,19 +291,23 @@ async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionRespon
         requires_urgent_evaluation = False
         
         if high_risk_detected and highest_risk_condition:
-            requires_urgent_evaluation = True
             confidence_diff = confidence - highest_risk_confidence
             
-            if confidence_diff < 0.05:  # Less than 5% difference
+            # URGENT: High-risk is very competitive with top prediction
+            if use_clinical_priority and confidence_diff < 0.10:
+                requires_urgent_evaluation = True
                 medical_warning = (
                     f"⚠️ URGENT: High-risk condition '{highest_risk_condition}' detected with {highest_risk_confidence*100:.1f}% confidence. "
-                    f"This is clinically close to the top prediction. Immediate dermatologist evaluation recommended, "
-                    f"especially if lesion shows: bleeding, non-healing, irregular borders, or rapid changes."
+                    f"This is clinically significant and close to the top prediction ({confidence*100:.1f}%). "
+                    f"Immediate dermatologist evaluation recommended, especially if lesion shows: "
+                    f"bleeding, non-healing, irregular borders, or rapid changes."
                 )
-            elif highest_risk_confidence > 0.20:  # More than 20% confidence for high-risk
+            # CAUTION: High-risk present but not competitive enough to override
+            elif not use_clinical_priority and highest_risk_confidence > 0.25:
                 medical_warning = (
                     f"⚠️ CAUTION: Potential serious condition '{highest_risk_condition}' detected ({highest_risk_confidence*100:.1f}% confidence). "
-                    f"Professional medical evaluation strongly recommended to rule out malignancy."
+                    f"While '{predicted_class}' is more likely ({confidence*100:.1f}%), consider professional evaluation "
+                    f"if symptoms persist or worsen, especially: bleeding, non-healing, rapid growth."
                 )
         
         logger.info(f"Clinical priority prediction: {final_predicted_class} with confidence {final_confidence:.4f}")
