@@ -1,3 +1,53 @@
-/.pipreqsignore
-/__pycache__
-/backenv
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environments
+venv/
+env/
+backenv/
+ENV/
+env.bak/
+venv.bak/
+
+# Model Files (Large - should be stored separately)
+*.keras
+*.h5
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.onnx
+*.pb
+
+# Training Results & Plots
+*.png
+*.jpg
+*.jpeg
+confusion_matrix.*
+training_*.png
+resultsskinwise/
+__results___files/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Misc
+.pipreqsignore
+.env
+.pytest_cache/

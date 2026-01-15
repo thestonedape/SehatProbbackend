@@ -43,8 +43,8 @@ class RootResponse(BaseModel):
 
 app = FastAPI(
     title="Skin Disease Classification API",
-    description="API for classifying skin diseases using VGG16 model",
-    version="1.0.0"
+    description="API for classifying skin diseases using EfficientNetV2 model",
+    version="2.0.0"
 )
 
 app.add_middleware(
@@ -70,7 +70,7 @@ async def load_model_and_mappings():
         
     
         model = tf.keras.models.load_model(
-            'final_model2.keras',
+            'resultsskinwise/efficientnet_final.keras',
             compile=False  
         )
  
@@ -80,11 +80,11 @@ async def load_model_and_mappings():
             metrics=['accuracy']
         )
         
-        logger.info("✅ Model loaded successfully!")
+        logger.info("✅ EfficientNet model loaded successfully!")
         
 
         try:
-            with open('class_index.pkl', 'rb') as f:
+            with open('resultsskinwise/class_index.pkl', 'rb') as f:
                 class_index = pickle.load(f)
             
             index_class = {v: k for k, v in class_index.items()}
@@ -118,7 +118,7 @@ def preprocess_image(image_file) -> np.ndarray:
         img_batch = np.expand_dims(img_array, axis=0)
         
     
-        img_preprocessed = tf.keras.applications.vgg16.preprocess_input(img_batch)
+        img_preprocessed = tf.keras.applications.efficientnet_v2.preprocess_input(img_batch)
         
         return img_preprocessed
         
