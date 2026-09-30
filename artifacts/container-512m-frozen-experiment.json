@@ -1,0 +1,22 @@
+{
+  "scope": "Docker Desktop (WSL2) container, --memory 512m no swap, real models, synthetic 224x224 PNGs; not accuracy evidence",
+  "image": "sde/sehat:frozen-test",
+  "image_bytes": 2598648714,
+  "memory_limit": "512m",
+  "cold_start_to_ready_seconds": null,
+  "ready": null,
+  "requests": 0,
+  "concurrency": 4,
+  "status_counts": {},
+  "p50_seconds": null,
+  "p95_seconds": null,
+  "successful_per_second": 0,
+  "peak_cgroup_memory_bytes": 383860736,
+  "peak_anon_memory_bytes_sampled": 397209600,
+  "peak_source": "sampled memory.current",
+  "oom_kill_events": null,
+  "container_oom_killed": true,
+  "container_exit_code": 137,
+  "log_tail": "INFO:     Started server process [1]\nINFO:     Waiting for application startup.\n{\"event\": \"model_loading\", \"level\": \"INFO\", \"logger\": \"main\"}\n{\"event\": \"Importing a function (__inference_pruned_12736) with ops with unsaved custom gradients. Will likely fail if a gradient is requested.\", \"level\": \"WARNING\", \"logger\": \"absl\"}\n{\"event\": \"\\u2705 EfficientNet model loaded successfully!\", \"level\": \"INFO\", \"logger\": \"main\"}\n",
+  "raw_requests": []
+}
