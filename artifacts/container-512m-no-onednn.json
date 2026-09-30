@@ -1,0 +1,534 @@
+{
+  "scope": "Docker Desktop (WSL2) container, --memory 512m no swap, real models, synthetic 224x224 PNGs; not accuracy evidence",
+  "image": "sde/sehat:review",
+  "image_bytes": 2431450222,
+  "memory_limit": "512m",
+  "cold_start_to_ready_seconds": 17.11000359999889,
+  "ready": {
+    "status": "ready",
+    "mode": "ensemble",
+    "models": {
+      "efficientnet": true,
+      "vgg16": true
+    },
+    "model_version": "keras-v1",
+    "vgg16_runtime": "keras"
+  },
+  "requests": 100,
+  "concurrency": 4,
+  "status_counts": {
+    "200": 100
+  },
+  "p50_seconds": 1.7706019500001275,
+  "p95_seconds": 2.019825474996469,
+  "successful_per_second": 2.1894530002869144,
+  "peak_cgroup_memory_bytes": 536870912,
+  "peak_anon_memory_bytes_sampled": 500170752,
+  "peak_source": "memory.peak",
+  "oom_kill_events": 0,
+  "container_oom_killed": false,
+  "container_exit_code": 0,
+  "log_tail": null,
+  "raw_requests": [
+    {
+      "request": 0,
+      "status": 200,
+      "seconds": 0.7257432999977027
+    },
+    {
+      "request": 1,
+      "status": 200,
+      "seconds": 1.3462416999973357
+    },
+    {
+      "request": 2,
+      "status": 200,
+      "seconds": 1.90570149999985
+    },
+    {
+      "request": 3,
+      "status": 200,
+      "seconds": 2.476514699999825
+    },
+    {
+      "request": 4,
+      "status": 200,
+      "seconds": 2.227239700005157
+    },
+    {
+      "request": 5,
+      "status": 200,
+      "seconds": 2.0825782000028994
+    },
+    {
+      "request": 6,
+      "status": 200,
+      "seconds": 2.0165226999961305
+    },
+    {
+      "request": 7,
+      "status": 200,
+      "seconds": 1.9272526999993715
+    },
+    {
+      "request": 8,
+      "status": 200,
+      "seconds": 1.9623606000022846
+    },
+    {
+      "request": 9,
+      "status": 200,
+      "seconds": 1.9590873999986798
+    },
+    {
+      "request": 10,
+      "status": 200,
+      "seconds": 1.9338541999968584
+    },
+    {
+      "request": 11,
+      "status": 200,
+      "seconds": 1.9018588999970234
+    },
+    {
+      "request": 12,
+      "status": 200,
+      "seconds": 1.8524802999963867
+    },
+    {
+      "request": 13,
+      "status": 200,
+      "seconds": 1.8115411000035238
+    },
+    {
+      "request": 14,
+      "status": 200,
+      "seconds": 1.7787813999966602
+    },
+    {
+      "request": 15,
+      "status": 200,
+      "seconds": 1.7729308000052697
+    },
+    {
+      "request": 16,
+      "status": 200,
+      "seconds": 1.7701385999971535
+    },
+    {
+      "request": 17,
+      "status": 200,
+      "seconds": 1.796056099999987
+    },
+    {
+      "request": 18,
+      "status": 200,
+      "seconds": 1.8369373000023188
+    },
+    {
+      "request": 19,
+      "status": 200,
+      "seconds": 1.8398935000004712
+    },
+    {
+      "request": 20,
+      "status": 200,
+      "seconds": 1.8827215999990585
+    },
+    {
+      "request": 21,
+      "status": 200,
+      "seconds": 1.8513241999971797
+    },
+    {
+      "request": 22,
+      "status": 200,
+      "seconds": 1.8173165999978664
+    },
+    {
+      "request": 23,
+      "status": 200,
+      "seconds": 1.7958972999986145
+    },
+    {
+      "request": 24,
+      "status": 200,
+      "seconds": 1.7437500000014552
+    },
+    {
+      "request": 25,
+      "status": 200,
+      "seconds": 1.740411499995389
+    },
+    {
+      "request": 26,
+      "status": 200,
+      "seconds": 1.7457992999989074
+    },
+    {
+      "request": 27,
+      "status": 200,
+      "seconds": 1.7486571999979788
+    },
+    {
+      "request": 28,
+      "status": 200,
+      "seconds": 1.740978499998164
+    },
+    {
+      "request": 29,
+      "status": 200,
+      "seconds": 1.7664236999989953
+    },
+    {
+      "request": 30,
+      "status": 200,
+      "seconds": 1.7542510999992373
+    },
+    {
+      "request": 31,
+      "status": 200,
+      "seconds": 1.761717100001988
+    },
+    {
+      "request": 32,
+      "status": 200,
+      "seconds": 1.7518359000023338
+    },
+    {
+      "request": 33,
+      "status": 200,
+      "seconds": 1.7514176999975462
+    },
+    {
+      "request": 34,
+      "status": 200,
+      "seconds": 1.7438324999966426
+    },
+    {
+      "request": 35,
+      "status": 200,
+      "seconds": 1.7550170000031358
+    },
+    {
+      "request": 36,
+      "status": 200,
+      "seconds": 1.8051864000008209
+    },
+    {
+      "request": 37,
+      "status": 200,
+      "seconds": 1.819192099996144
+    },
+    {
+      "request": 38,
+      "status": 200,
+      "seconds": 1.8205890000026557
+    },
+    {
+      "request": 39,
+      "status": 200,
+      "seconds": 1.8384476999999606
+    },
+    {
+      "request": 40,
+      "status": 200,
+      "seconds": 1.799546800000826
+    },
+    {
+      "request": 41,
+      "status": 200,
+      "seconds": 1.8752968999979203
+    },
+    {
+      "request": 42,
+      "status": 200,
+      "seconds": 1.9278645000013057
+    },
+    {
+      "request": 43,
+      "status": 200,
+      "seconds": 2.091491600003792
+    },
+    {
+      "request": 44,
+      "status": 200,
+      "seconds": 2.0851484000013443
+    },
+    {
+      "request": 45,
+      "status": 200,
+      "seconds": 1.9973831000024802
+    },
+    {
+      "request": 46,
+      "status": 200,
+      "seconds": 1.9519551000048523
+    },
+    {
+      "request": 47,
+      "status": 200,
+      "seconds": 1.764046700001927
+    },
+    {
+      "request": 48,
+      "status": 200,
+      "seconds": 1.7643901999981608
+    },
+    {
+      "request": 49,
+      "status": 200,
+      "seconds": 1.7565197000003536
+    },
+    {
+      "request": 50,
+      "status": 200,
+      "seconds": 1.7520569999978761
+    },
+    {
+      "request": 51,
+      "status": 200,
+      "seconds": 1.7431084999989253
+    },
+    {
+      "request": 52,
+      "status": 200,
+      "seconds": 1.7513857999947504
+    },
+    {
+      "request": 53,
+      "status": 200,
+      "seconds": 1.7310615999958827
+    },
+    {
+      "request": 54,
+      "status": 200,
+      "seconds": 1.742215500002203
+    },
+    {
+      "request": 55,
+      "status": 200,
+      "seconds": 1.8176288999966346
+    },
+    {
+      "request": 56,
+      "status": 200,
+      "seconds": 1.8191219999935129
+    },
+    {
+      "request": 57,
+      "status": 200,
+      "seconds": 1.8163870999997016
+    },
+    {
+      "request": 58,
+      "status": 200,
+      "seconds": 1.8204898000039975
+    },
+    {
+      "request": 59,
+      "status": 200,
+      "seconds": 1.7330814999950235
+    },
+    {
+      "request": 60,
+      "status": 200,
+      "seconds": 1.7458052000001771
+    },
+    {
+      "request": 61,
+      "status": 200,
+      "seconds": 1.7646651999966707
+    },
+    {
+      "request": 62,
+      "status": 200,
+      "seconds": 1.7655906999934814
+    },
+    {
+      "request": 63,
+      "status": 200,
+      "seconds": 1.779777900002955
+    },
+    {
+      "request": 64,
+      "status": 200,
+      "seconds": 1.7623402000026545
+    },
+    {
+      "request": 65,
+      "status": 200,
+      "seconds": 1.7637483999933465
+    },
+    {
+      "request": 66,
+      "status": 200,
+      "seconds": 1.752973100003146
+    },
+    {
+      "request": 67,
+      "status": 200,
+      "seconds": 1.7565333000020473
+    },
+    {
+      "request": 68,
+      "status": 200,
+      "seconds": 1.75942170000053
+    },
+    {
+      "request": 69,
+      "status": 200,
+      "seconds": 1.764591899998777
+    },
+    {
+      "request": 70,
+      "status": 200,
+      "seconds": 1.7649182000022847
+    },
+    {
+      "request": 71,
+      "status": 200,
+      "seconds": 1.7756107000022894
+    },
+    {
+      "request": 72,
+      "status": 200,
+      "seconds": 1.8074103999970248
+    },
+    {
+      "request": 73,
+      "status": 200,
+      "seconds": 1.8095908000032068
+    },
+    {
+      "request": 74,
+      "status": 200,
+      "seconds": 1.800622900002054
+    },
+    {
+      "request": 75,
+      "status": 200,
+      "seconds": 1.79960829999618
+    },
+    {
+      "request": 76,
+      "status": 200,
+      "seconds": 1.7482462999978452
+    },
+    {
+      "request": 77,
+      "status": 200,
+      "seconds": 1.7489353999990271
+    },
+    {
+      "request": 78,
+      "status": 200,
+      "seconds": 1.750802799993835
+    },
+    {
+      "request": 79,
+      "status": 200,
+      "seconds": 1.7625499999994645
+    },
+    {
+      "request": 80,
+      "status": 200,
+      "seconds": 1.7728738999940106
+    },
+    {
+      "request": 81,
+      "status": 200,
+      "seconds": 1.7710653000031016
+    },
+    {
+      "request": 82,
+      "status": 200,
+      "seconds": 1.77486840000347
+    },
+    {
+      "request": 83,
+      "status": 200,
+      "seconds": 1.760352299999795
+    },
+    {
+      "request": 84,
+      "status": 200,
+      "seconds": 1.7911120999997365
+    },
+    {
+      "request": 85,
+      "status": 200,
+      "seconds": 1.7987972000046284
+    },
+    {
+      "request": 86,
+      "status": 200,
+      "seconds": 1.8185556999960681
+    },
+    {
+      "request": 87,
+      "status": 200,
+      "seconds": 1.799856899997394
+    },
+    {
+      "request": 88,
+      "status": 200,
+      "seconds": 1.792259699999704
+    },
+    {
+      "request": 89,
+      "status": 200,
+      "seconds": 1.7654685000015888
+    },
+    {
+      "request": 90,
+      "status": 200,
+      "seconds": 1.7668000999983633
+    },
+    {
+      "request": 91,
+      "status": 200,
+      "seconds": 1.7640749999991385
+    },
+    {
+      "request": 92,
+      "status": 200,
+      "seconds": 1.757664199998544
+    },
+    {
+      "request": 93,
+      "status": 200,
+      "seconds": 1.7602727000048617
+    },
+    {
+      "request": 94,
+      "status": 200,
+      "seconds": 1.7509535999997752
+    },
+    {
+      "request": 95,
+      "status": 200,
+      "seconds": 1.7618188000051305
+    },
+    {
+      "request": 96,
+      "status": 200,
+      "seconds": 1.7419531999985338
+    },
+    {
+      "request": 97,
+      "status": 200,
+      "seconds": 1.7476946999959182
+    },
+    {
+      "request": 98,
+      "status": 200,
+      "seconds": 1.740567300003022
+    },
+    {
+      "request": 99,
+      "status": 200,
+      "seconds": 1.7409723000018857
+    }
+  ]
+}

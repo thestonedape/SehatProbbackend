@@ -1,0 +1,43 @@
+{
+  "scope": "local real-model packaged Space smoke test; synthetic input, no accuracy claim",
+  "ready": {
+    "status": "ready",
+    "mode": "ensemble",
+    "models": {
+      "efficientnet": true,
+      "vgg16": true
+    },
+    "model_version": "keras-v1",
+    "vgg16_runtime": "keras"
+  },
+  "prediction": {
+    "model_version": "keras-v1",
+    "serving_mode": "ensemble",
+    "predicted_class": "Atopic",
+    "confidence": 0.23617832362651825,
+    "all_predictions": [
+      {
+        "class_name": "Atopic",
+        "confidence": 0.23617832362651825,
+        "risk_level": "low",
+        "clinical_priority": 1
+      },
+      {
+        "class_name": "Benign",
+        "confidence": 0.19864188134670258,
+        "risk_level": "low",
+        "clinical_priority": 2
+      },
+      {
+        "class_name": "Melanocytic",
+        "confidence": 0.14256435632705688,
+        "risk_level": "high",
+        "clinical_priority": 3
+      }
+    ],
+    "medical_warning": null,
+    "requires_urgent_evaluation": false
+  },
+  "prediction_seconds": 3.236566200001107,
+  "startup_and_test_seconds": 18.871067899999616
+}

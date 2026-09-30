@@ -80,10 +80,20 @@ An earlier 100-request burst at concurrency 4 against the original fail-fast adm
 | Status | Evidence |
 |---|---|
 | Implemented | validated bounded API, lifespan model loading/fallback, one inference slot with bounded waiters, versions/checksums, request IDs, rate limits, metrics, Docker/CI, flagged TFLite VGG16 runtime |
-| Measured locally | 21 checks pass; 100 baseline and upgrade real-model inferences; 512 MB container: 100/100 served, 0 OOM; ensemble TFLite parity passed but not adopted |
+| Measured locally | 24 checks pass; 100 baseline and upgrade real-model inferences; 512 MB container: 100/100 served, 0 OOM; ensemble TFLite parity passed but not adopted; packaged Space real-model smoke check passes |
 | Verified live | upgrade not yet deployed/verified |
 | Gate result | **fails the 400 MB margin**: 512 MiB total cgroup peak (426 MiB sampled anonymous memory) under a 512 MB limit. It serves without OOM, but with too little headroom to call it safe on a 512 MB host |
 
 GitHub Actions tests the lightweight API and builds Docker before any configured deployment hook. The 512 MB gate requires 100 requests without OOM **and** peak memory below 400 MB; the second condition is not met. The remaining footprint is the TensorFlow runtime plus two models. Options are a larger free tier, EfficientNet-only (degraded) serving, or a later fully verified TFLite/ONNX runtime. Hugging Face CPU/Docker creation now requires a paid plan, so it is not an assumed free fallback. No paid resources are provisioned.
 
 Keep the previous commit and TensorFlow artifacts for rollback. Deploy only a validated revision. Resume and portfolio copy are unchanged.
+
+### Free Space packaging under verification
+
+`space/space_app.py` mounts a Gradio status page at `/status` on the existing FastAPI service. Inference remains the original CPU TensorFlow ensemble, without GPU acceleration. `space/requirements.txt` is standalone because the Space builder mounts only that requirements file during dependency installation. To package it, copy `main.py`, `reliability.py`, and the four deployment files (`README.md`, `requirements.txt`, `space_app.py`, `space_models.json`) from `space/` into the Space root. Never copy `.env`, local logs, or database backups. The model manifest pins original public GitHub commit `df64b8c`, sizes and SHA-256 checksums; downloads are verified before loading, including the class-map pickle, and transient network failures retry up to three times.
+
+Run `python space/verify_service.py` with real dependencies and original artifacts installed. `artifacts/space-local-smoke.json` records local ensemble readiness, a successful synthetic-image prediction, status-page availability and rejection of corrupt input. This is a smoke check, not accuracy or load evidence. The free Gradio ZeroGPU Space `Stonedape69/sehat-pro-api` downloaded, verified and loaded both models, but the provider terminated it with `No @spaces.GPU function detected during startup`. The CPU API is not a supported free ZeroGPU deployment. `artifacts/space-deployment-blocker.json` records that result. No artificial GPU callback was added, no paid hosting was provisioned, and the existing frontend endpoint remains unchanged.
+
+Disabling oneDNN also failed the memory gate: `artifacts/container-512m-no-onednn.json` records 100 successful responses without OOM but a 512 MiB total cgroup peak and approximately 477 MiB sampled anonymous memory. The default oneDNN configuration is retained.
+
+The actual EfficientNet fallback was also tested by rejecting VGG16 through an intentionally mismatched checksum. `artifacts/container-512m-degraded.json` records degraded readiness, 100/100 successes, p95 0.529 seconds and 341 MiB sampled anonymous memory, but total cgroup peak still reaches approximately 512 MiB. This also fails the strict 400 MB gate. These are fallback measurements, not ensemble predictions; no deployment default was changed.

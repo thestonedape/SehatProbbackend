@@ -1,0 +1,17 @@
+{
+  "scope": "Actual free Hugging Face Gradio ZeroGPU deployment attempt",
+  "space": "https://huggingface.co/spaces/Stonedape69/sehat-pro-api",
+  "revision": "afec1a8fe9c674705232ff5fe3db4371d9b965fc",
+  "application_startup_utc": "2026-09-30 05:14:04",
+  "dependency_build_passed": true,
+  "pinned_artifact_verification_passed": true,
+  "efficientnet_loaded": true,
+  "vgg16_loaded": true,
+  "class_mapping_loaded": true,
+  "uvicorn_started_port": 7860,
+  "platform_state": "runtime_error",
+  "platform_error": "No @spaces.GPU function detected during startup",
+  "live_upload_to_prediction_verified": false,
+  "paid_service_provisioned": false,
+  "existing_frontend_endpoint_changed": false
+}

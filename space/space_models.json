@@ -1,0 +1,20 @@
+[
+  {
+    "path": "final_model2.keras",
+    "url": "https://media.githubusercontent.com/media/thestonedape/SehatProbbackend/df64b8cf8443bec043c1b8f05f591cfc79eb12a7/final_model2.keras",
+    "bytes": 117220015,
+    "sha256": "4b65bae5c57969faff73024635743146da952eb176dc20cfce6abb8f7a150561"
+  },
+  {
+    "path": "resultsskinwise/efficientnet_final.keras",
+    "url": "https://media.githubusercontent.com/media/thestonedape/SehatProbbackend/df64b8cf8443bec043c1b8f05f591cfc79eb12a7/resultsskinwise/efficientnet_final.keras",
+    "bytes": 59173567,
+    "sha256": "2b29f733d6ae6875a10e39705e43f67b80f9494b6cff887362cbc5c7aab8ce1a"
+  },
+  {
+    "path": "resultsskinwise/class_index.pkl",
+    "url": "https://media.githubusercontent.com/media/thestonedape/SehatProbbackend/df64b8cf8443bec043c1b8f05f591cfc79eb12a7/resultsskinwise/class_index.pkl",
+    "bytes": 137,
+    "sha256": "fa03a63ae9592621b72a2853ea16046566632eca24613e93f15041b53ced53ef"
+  }
+]
