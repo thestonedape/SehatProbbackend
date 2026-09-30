@@ -1,3 +1,4 @@
+from __future__ import annotations
 import os
 import gc
 import logging
@@ -6,10 +7,13 @@ import logging
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Request
+from contextlib import asynccontextmanager
+from starlette.concurrency import run_in_threadpool
+from reliability import install_observability, validate_image, model_checksum, admitted_prediction, rate_limit, MODEL_VERSION
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import tensorflow as tf
+tf = None  # Imported only during real model startup.
 import numpy as np
 from PIL import Image
 import pickle
@@ -17,8 +21,7 @@ import io
 from typing import List, Optional
 
 
-tf.config.threading.set_inter_op_parallelism_threads(1)
-tf.config.threading.set_intra_op_parallelism_threads(1)
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -78,6 +81,8 @@ class PredictionResult(BaseModel):
     clinical_priority: int  # Lower = higher priority
 
 class PredictionResponse(BaseModel):
+    model_version: str = MODEL_VERSION
+    serving_mode: str = "efficientnet"
     predicted_class: str
     confidence: float
     all_predictions: List[PredictionResult]
@@ -93,7 +98,16 @@ class RootResponse(BaseModel):
     message: str
     endpoints: dict
 
+@asynccontextmanager
+async def lifespan(app):
+    app.state.stopping = False
+    await run_in_threadpool(load_model_and_mappings)
+    yield
+    app.state.stopping = True
+    await shutdown_event()
+
 app = FastAPI(
+    lifespan=lifespan,
     title="Skin Disease Classification API",
     description="API for classifying skin diseases using ensemble of EfficientNetV2 and VGG16 models",
     version="2.1.0"
@@ -112,38 +126,61 @@ model_efficientnet: Optional[tf.keras.Model] = None
 model_vgg16: Optional[tf.keras.Model] = None
 class_index: Optional[dict] = None
 index_class: Optional[dict] = None
+efficient_infer = None
+vgg_infer = None
 
-@app.on_event("startup")
-async def load_model_and_mappings():
+VGG16_RUNTIME = os.getenv('VGG16_RUNTIME', 'keras')
+VGG16_TFLITE_PATH = os.getenv('VGG16_TFLITE_PATH', 'models/vgg16.tflite')
+
+class TFLiteModel:
+    """Keras-compatible call surface over a TFLite interpreter; calls are serialized by admission."""
+    def __init__(self, tf_module, path):
+        self.interpreter = tf_module.lite.Interpreter(model_path=path, num_threads=1)
+        self.interpreter.allocate_tensors()
+        self.input = self.interpreter.get_input_details()[0]['index']
+        output = self.interpreter.get_output_details()[0]
+        self.output, self.output_shape = output['index'], tuple(output['shape'])
+
+    def __call__(self, batch, training=False):
+        self.interpreter.set_tensor(self.input, np.asarray(batch, dtype=np.float32))
+        self.interpreter.invoke()
+        return self.interpreter.get_tensor(self.output).copy()
+
+def load_model_and_mappings():
     """Load both models and class mappings on startup"""
-    global model_efficientnet, model_vgg16, class_index, index_class
+    global model_efficientnet, model_vgg16, class_index, index_class, tf, efficient_infer, vgg_infer
+    efficient_infer = vgg_infer = None
     
     try:
-        logger.info("Starting model loading...")
+        import tensorflow as tensorflow
+        tf = tensorflow
+        tf.config.threading.set_inter_op_parallelism_threads(1)
+        tf.config.threading.set_intra_op_parallelism_threads(1)
+        logger.info("model_loading")
+        model_checksum('resultsskinwise/efficientnet_final.keras', 'EFFICIENTNET_SHA256')
         
         # Load EfficientNet model
         model_efficientnet = tf.keras.models.load_model(
             'resultsskinwise/efficientnet_final.keras',
             compile=False  
         )
-        model_efficientnet.compile(
-            optimizer='adam',
-            loss='categorical_crossentropy',
-            metrics=['accuracy']
-        )
+
         logger.info("✅ EfficientNet model loaded successfully!")
         
         # Load VGG16 model
         try:
-            model_vgg16 = tf.keras.models.load_model(
-                'final_model2.keras',
-                compile=False  
-            )
-            model_vgg16.compile(
-                optimizer='adam',
-                loss='categorical_crossentropy',
-                metrics=['accuracy']
-            )
+            if VGG16_RUNTIME == 'tflite':
+                # Parity-verified conversion (artifacts/tflite-verification.json); weights are
+                # memory-mapped instead of copied into the TensorFlow heap. Keras stays the rollback.
+                model_checksum(VGG16_TFLITE_PATH, 'VGG16_TFLITE_SHA256')
+                model_vgg16 = TFLiteModel(tf, VGG16_TFLITE_PATH)
+            else:
+                model_checksum('final_model2.keras', 'VGG16_SHA256')
+                model_vgg16 = tf.keras.models.load_model(
+                    'final_model2.keras',
+                    compile=False
+                )
+
             logger.info("✅ VGG16 model loaded successfully!")
         except Exception as vgg_error:
             logger.warning(f"⚠️ VGG16 model not available: {str(vgg_error)}. Using EfficientNet only.")
@@ -151,10 +188,16 @@ async def load_model_and_mappings():
 
         # Load class mappings
         try:
+            model_checksum('resultsskinwise/class_index.pkl', 'CLASS_INDEX_SHA256')
             with open('resultsskinwise/class_index.pkl', 'rb') as f:
                 class_index = pickle.load(f)
             
             index_class = {v: k for k, v in class_index.items()}
+            if set(index_class) != set(range(len(class_index))) or model_efficientnet.output_shape[-1] != len(class_index):
+                raise ValueError('Model output and class mapping are incompatible')
+            if model_vgg16 is not None and model_vgg16.output_shape[-1] != len(class_index):
+                model_vgg16 = None
+                logger.warning('vgg16_mapping_mismatch; efficientnet fallback')
             
             logger.info(f"✅ Class mappings loaded! Available classes: {list(class_index.keys())}")
             
@@ -163,6 +206,12 @@ async def load_model_and_mappings():
             raise HTTPException(status_code=500, detail="Class index file not found")
       
         gc.collect()
+        # Compile serving calls once, without training configuration or .predict
+        # datasets. The fixed input shape bounds retracing and keeps warm calls fast.
+        signature=[tf.TensorSpec([1,224,224,3], tf.float32)]
+        efficient_infer=tf.function(lambda batch: model_efficientnet(batch,training=False),input_signature=signature)
+        if model_vgg16 is not None and not isinstance(model_vgg16, TFLiteModel):
+            vgg_infer=tf.function(lambda batch: model_vgg16(batch,training=False),input_signature=signature)
         
     except Exception as e:
         logger.error(f"❌ Error loading models or mappings: {str(e)}")
@@ -180,9 +229,10 @@ def preprocess_image(image_file, model_type='efficientnet'):
         img_batch = np.expand_dims(img_array, axis=0)
         
         if model_type == 'efficientnet':
-            img_preprocessed = tf.keras.applications.efficientnet_v2.preprocess_input(img_batch)
+            img_preprocessed = img_batch
         else:  # vgg16
-            img_preprocessed = tf.keras.applications.vgg16.preprocess_input(img_batch)
+            img_preprocessed = img_batch[..., ::-1].copy()
+            img_preprocessed -= np.array([103.939, 116.779, 123.68], dtype=np.float32)
         
         return img_preprocessed
         
@@ -190,39 +240,20 @@ def preprocess_image(image_file, model_type='efficientnet'):
         logger.error(f"Image preprocessing error: {str(e)}")
         raise HTTPException(status_code=400, detail=f"Error processing image: {str(e)}")
 
-@app.post("/predict", response_model=PredictionResponse)
-async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionResponse:
-    """
-    Ensemble prediction combining EfficientNet and VGG16 models
-    Returns top 3 predictions with averaged confidence scores
-    """
-    
-    if model_efficientnet is None:
-        raise HTTPException(status_code=503, detail="Model not loaded. Please try again later.")
-    
-    if not file.content_type or not file.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="File must be an image")
-    
-    if file.size and file.size > 10 * 1024 * 1024:
-        raise HTTPException(status_code=400, detail="File too large. Maximum size is 10MB")
-    
+def predict_bytes(image_data: bytes) -> PredictionResponse:
     try:
-        image_data = await file.read()
-        
         # Get predictions from EfficientNet
         preprocessed_efficient = preprocess_image(image_data, 'efficientnet')
-        predictions_efficient = model_efficientnet.predict(preprocessed_efficient, verbose=0)[0]
+        predictions_efficient = np.asarray(efficient_infer(preprocessed_efficient) if efficient_infer is not None else model_efficientnet(preprocessed_efficient, training=False))[0]
         
         # Ensemble: Average predictions if VGG16 is available
         if model_vgg16 is not None:
             preprocessed_vgg = preprocess_image(image_data, 'vgg16')
-            predictions_vgg = model_vgg16.predict(preprocessed_vgg, verbose=0)[0]
+            predictions_vgg = np.asarray(vgg_infer(preprocessed_vgg) if vgg_infer is not None else model_vgg16(preprocessed_vgg, training=False))[0]
             # Average the predictions from both models
             predictions = (predictions_efficient + predictions_vgg) / 2.0
-            logger.info("Using ensemble of EfficientNet + VGG16")
         else:
             predictions = predictions_efficient
-            logger.info("Using EfficientNet only")
         
         # Get top prediction based on raw confidence
         predicted_index = np.argmax(predictions)
@@ -266,7 +297,6 @@ async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionRespon
             all_predictions_with_risk.sort(
                 key=lambda x: (0 if x['risk_level'] == 'high' else 1, -x['confidence'])
             )
-            logger.info(f"Clinical prioritization: Moving '{highest_risk_condition}' to top due to competitive confidence")
         else:
             # Normal sort by confidence only
             all_predictions_with_risk.sort(key=lambda x: -x['confidence'])
@@ -310,28 +340,46 @@ async def predict_skin_disease(file: UploadFile = File(...)) -> PredictionRespon
                     f"if symptoms persist or worsen, especially: bleeding, non-healing, rapid growth."
                 )
         
-        logger.info(f"Clinical priority prediction: {final_predicted_class} with confidence {final_confidence:.4f}")
-        if medical_warning:
-            logger.warning(medical_warning)
         
         return PredictionResponse(
             predicted_class=final_predicted_class,
             confidence=final_confidence,
             all_predictions=top_3_predictions,
             medical_warning=medical_warning,
-            requires_urgent_evaluation=requires_urgent_evaluation
+            requires_urgent_evaluation=requires_urgent_evaluation,
+            serving_mode="ensemble" if model_vgg16 is not None else "efficientnet"
         )
         
     except Exception as e:
-        logger.error(f"Prediction error: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
+        logger.error("prediction_failed exception_type=%s", type(e).__name__)
+        raise HTTPException(status_code=500, detail="Inference failed")
+
+@app.post("/predict", response_model=PredictionResponse)
+async def predict_skin_disease(request: Request, file: UploadFile = File(...)):
+    try:
+        if model_efficientnet is None or not index_class or getattr(app.state, 'stopping', False):
+            raise HTTPException(503, "Model not ready")
+        rate_limit(request)
+        async with admitted_prediction():
+            # Decoding stays inside admission so large images cannot decode concurrently.
+            image_data = await validate_image(file)
+            return await run_in_threadpool(predict_bytes, image_data)
+    finally:
+        await file.close()
+
+@app.get("/ready")
+def ready():
+    available = model_efficientnet is not None and bool(index_class) and not getattr(app.state, 'stopping', False)
+    if not available:
+        raise HTTPException(503, "Model not ready")
+    return {"status": "ready", "mode": "ensemble" if model_vgg16 is not None else "degraded", "models": {"efficientnet": True, "vgg16": model_vgg16 is not None}, "model_version": MODEL_VERSION, "vgg16_runtime": VGG16_RUNTIME if model_vgg16 is not None else None}
 
 @app.get("/health", response_model=HealthResponse)
 async def health_check() -> HealthResponse:
     """Health check endpoint"""
     models_loaded = model_efficientnet is not None
     return HealthResponse(
-        status="healthy" if models_loaded else "model_not_loaded",
+        status="healthy",
         model_loaded=models_loaded,
         available_classes=list(class_index.keys()) if class_index else []
     )
@@ -348,10 +396,10 @@ async def root() -> RootResponse:
         }
     )
 
-@app.on_event("shutdown")
 async def shutdown_event():
     """Clean up models on shutdown"""
-    global model_efficientnet, model_vgg16
+    global model_efficientnet, model_vgg16, efficient_infer, vgg_infer
+    efficient_infer = vgg_infer = None
     if model_efficientnet is not None:
         del model_efficientnet
         model_efficientnet = None
@@ -360,6 +408,8 @@ async def shutdown_event():
         model_vgg16 = None
     gc.collect()
     logger.info("Application shutdown complete")
+
+install_observability(app)
 
 if __name__ == "__main__":
     import uvicorn
