@@ -1,0 +1,14 @@
+{
+  "recorded_after_runs": true,
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "logical_cpus": 16,
+  "versions": {
+    "numpy": "1.26.4",
+    "tensorflow-cpu": "2.19.0",
+    "keras": "3.15.1",
+    "ml-dtypes": "0.5.1",
+    "fastapi": "0.115.12",
+    "pillow": "12.3.0"
+  }
+}

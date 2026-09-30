@@ -47,3 +47,6 @@ Thumbs.db
 .pipreqsignore
 .env
 .pytest_cache/
+.venv/
+*.tflite
+artifacts/local/

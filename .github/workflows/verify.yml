@@ -1,0 +1,21 @@
+name: API verification
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements-dev.txt
+      - run: python -m pytest tests -q
+      - run: docker build -t sehat:${{ github.sha }} .
+      - name: Deploy verified main revision
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -n "$DEPLOY_HOOK" ]; then curl --fail --silent --show-error -X POST "$DEPLOY_HOOK"; else echo 'Deployment hook not configured; build verified, no deployment triggered.'; fi

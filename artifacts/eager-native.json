@@ -1,0 +1,2973 @@
+{
+  "runtime": "native Windows, sequential inference, real model",
+  "corpus": "50 deterministic synthetic PNG images, seed 7300930; numerical inputs only, not clinical accuracy evidence",
+  "requests": 100,
+  "warm_p50_seconds": 1.1191681999989669,
+  "warm_p95_seconds": 1.198791204993904,
+  "throughput_per_second": 0.8808824744759349,
+  "cold_start_seconds": 7.743703100000857,
+  "peak_process_rss_bytes": 752586752,
+  "failures": [],
+  "raw_latency_seconds": [
+    1.1437471000026562,
+    1.1045723000061116,
+    1.1986951999933808,
+    1.1922447999968426,
+    1.1179650999984005,
+    1.1109068000005209,
+    1.1330810999934329,
+    1.116492900000594,
+    1.1122310000064317,
+    1.1660078999993857,
+    1.1298339999993914,
+    1.1232144000023254,
+    1.1269243999995524,
+    1.183013400004711,
+    1.1289520999998786,
+    1.1222560000023805,
+    1.149326500002644,
+    1.1171935999955167,
+    1.1053428999948665,
+    1.1109667999990052,
+    1.1385888000004343,
+    1.0953947000016342,
+    1.1076931999996305,
+    1.1266650999968988,
+    1.105807799998729,
+    1.1018914000014775,
+    1.1068460999958916,
+    1.1242036999974516,
+    1.101706599998579,
+    1.114775499998359,
+    1.1813613999984227,
+    1.1108635000055074,
+    1.1073430000033113,
+    1.1018355999985943,
+    1.1296632000012323,
+    1.1219559000019217,
+    1.1155733999985387,
+    1.1351100000028964,
+    1.1467749000003096,
+    1.114102699997602,
+    1.1025841999944532,
+    1.1321750999995857,
+    1.0982646999982535,
+    1.1102515000020503,
+    1.1078502999953344,
+    1.125155599998834,
+    1.10323470000003,
+    1.1007108000048902,
+    1.1229571000003489,
+    1.1067667000024812,
+    1.102337800002715,
+    1.094353400003456,
+    1.1216562999979942,
+    1.095788699996774,
+    1.1016455000062706,
+    1.1053127999985009,
+    1.1299454999971204,
+    1.1437998999972478,
+    1.174300899998343,
+    1.137717799996608,
+    1.1017423000012059,
+    1.107697499995993,
+    1.1127527999997255,
+    1.1314788999952725,
+    1.1125337000048603,
+    1.1119593999974313,
+    1.1393365000039921,
+    1.12250579999818,
+    1.2565945999958785,
+    1.1440187000043807,
+    1.1333436999993864,
+    1.1859341000017594,
+    1.7165680999969481,
+    1.340805799998634,
+    1.248706400001538,
+    1.2006153000038466,
+    1.1741369999945164,
+    1.1203712999995332,
+    1.1345887999996194,
+    1.1758906000031857,
+    1.1062658999944688,
+    1.101991799994721,
+    1.172541200001433,
+    1.1362311000048066,
+    1.1068132000000332,
+    1.0982651000012993,
+    1.1225743999966653,
+    1.1054283999983454,
+    1.1089171999992686,
+    1.1072784999996657,
+    1.132212399999844,
+    1.0994993999993312,
+    1.1722244000047795,
+    1.1328393000003416,
+    1.1075182999993558,
+    1.109208399997442,
+    1.0971908999999869,
+    1.1273214000029839,
+    1.099047600000631,
+    1.1096375999986776
+  ],
+  "results": [
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Atopic",
+      "confidence": 0.254724383354187,
+      "all_predictions": [
+        {
+          "class_name": "Atopic",
+          "confidence": 0.254724383354187,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Benign",
+          "confidence": 0.16498492658138275,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.16044220328330994,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Atopic",
+      "confidence": 0.24657414853572845,
+      "all_predictions": [
+        {
+          "class_name": "Atopic",
+          "confidence": 0.24657414853572845,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Benign",
+          "confidence": 0.16801391541957855,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.14799977838993073,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.25651291012763977,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.25651291012763977,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.1646735668182373,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.15071497857570648,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.39194661378860474,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.39194661378860474,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.2059832513332367,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.17513927817344666,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.3913985788822174,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.3913985788822174,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.2002429962158203,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.17528682947158813,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.3937515616416931,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.3937515616416931,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.20518368482589722,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.16226056218147278,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.4088936448097229,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.4088936448097229,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.20662431418895721,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.14888088405132294,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.43574258685112,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.43574258685112,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.20181205868721008,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.13521407544612885,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.48266664147377014,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.48266664147377014,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.1892530620098114,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.12120313942432404,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.4078139364719391,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.4078139364719391,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.15184713900089264,
+          "risk_level": "high",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.1286589503288269,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.801967203617096,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.801967203617096,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09801049530506134,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0439663827419281,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8199902176856995,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8199902176856995,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07772397249937057,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.04364023730158806,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.779534101486206,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.779534101486206,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.0936729833483696,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.06684934347867966,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8295103311538696,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8295103311538696,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08771990239620209,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.03695283085107803,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7714988589286804,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7714988589286804,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09617355465888977,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.07209006696939468,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8058497905731201,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8058497905731201,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08292196691036224,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.06345322728157043,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8347777128219604,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8347777128219604,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07960419356822968,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0352453738451004,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7059588432312012,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7059588432312012,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.16124309599399567,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.056596238166093826,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.816972017288208,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.816972017288208,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07982540875673294,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.042865388095378876,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.6776044368743896,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.6776044368743896,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.126485675573349,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.10164694488048553,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8486294746398926,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8486294746398926,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07536640763282776,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.028820624575018883,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7945125102996826,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7945125102996826,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.10417070984840393,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.043939076364040375,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8029695749282837,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8029695749282837,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09399348497390747,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.044916123151779175,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8706949949264526,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8706949949264526,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.06571120023727417,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.026183534413576126,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7383847236633301,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7383847236633301,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11623957008123398,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.062126100063323975,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7888957262039185,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7888957262039185,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11009706556797028,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.037439923733472824,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7004425525665283,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7004425525665283,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11931858956813812,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.09721183031797409,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8294776082038879,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8294776082038879,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08458009362220764,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.040418677031993866,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7442742586135864,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7442742586135864,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.14008541405200958,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05627637729048729,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8072422742843628,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8072422742843628,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.0819166749715805,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05726076662540436,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7380411624908447,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7380411624908447,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.1368872970342636,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05945079028606415,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.815422534942627,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.815422534942627,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07089045643806458,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0609038881957531,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.6526689529418945,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.6526689529418945,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.12699487805366516,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.09632299840450287,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7769399881362915,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7769399881362915,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09982737898826599,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05971699580550194,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.718929648399353,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.718929648399353,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.14479735493659973,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.059381335973739624,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.789432168006897,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.789432168006897,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.08506721258163452,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.0715336948633194,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8442047834396362,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8442047834396362,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08424615859985352,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.03266732022166252,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7030323147773743,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7030323147773743,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.10443253815174103,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.08136837184429169,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8092149496078491,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8092149496078491,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07464300096035004,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05767803266644478,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7502425909042358,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7502425909042358,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11061066389083862,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0755627453327179,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7841587662696838,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7841587662696838,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.10793150216341019,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.04421626031398773,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.813705325126648,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.813705325126648,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08691049367189407,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.0344671830534935,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.807167649269104,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.807167649269104,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11630319058895111,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.026059340685606003,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8446688055992126,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8446688055992126,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.060879167169332504,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.03686417266726494,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8203386068344116,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8203386068344116,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09634111821651459,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.03086208552122116,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7923333644866943,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7923333644866943,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0905790776014328,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.06981135159730911,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7685942649841309,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7685942649841309,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09577763825654984,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05677757412195206,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.702865719795227,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.702865719795227,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.10124114155769348,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0615050233900547,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.719249427318573,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.719249427318573,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.12109404802322388,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.08027254790067673,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7510806918144226,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7510806918144226,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.12751813232898712,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.04978022351861,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Atopic",
+      "confidence": 0.254724383354187,
+      "all_predictions": [
+        {
+          "class_name": "Atopic",
+          "confidence": 0.254724383354187,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Benign",
+          "confidence": 0.16498492658138275,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.16044220328330994,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Atopic",
+      "confidence": 0.24657414853572845,
+      "all_predictions": [
+        {
+          "class_name": "Atopic",
+          "confidence": 0.24657414853572845,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Benign",
+          "confidence": 0.16801391541957855,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.14799977838993073,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.25651291012763977,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.25651291012763977,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.1646735668182373,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.15071497857570648,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.39194661378860474,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.39194661378860474,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.2059832513332367,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.17513927817344666,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.3913985788822174,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.3913985788822174,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.2002429962158203,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.17528682947158813,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.3937515616416931,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.3937515616416931,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.20518368482589722,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.16226056218147278,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.4088936448097229,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.4088936448097229,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.20662431418895721,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.14888088405132294,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.43574258685112,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.43574258685112,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.20181205868721008,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.13521407544612885,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.48266664147377014,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.48266664147377014,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.1892530620098114,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.12120313942432404,
+          "risk_level": "high",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Benign",
+      "confidence": 0.4078139364719391,
+      "all_predictions": [
+        {
+          "class_name": "Benign",
+          "confidence": 0.4078139364719391,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Melanocytic",
+          "confidence": 0.15184713900089264,
+          "risk_level": "high",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Basal",
+          "confidence": 0.1286589503288269,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.801967203617096,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.801967203617096,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09801049530506134,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0439663827419281,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8199902176856995,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8199902176856995,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07772397249937057,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.04364023730158806,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.779534101486206,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.779534101486206,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.0936729833483696,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.06684934347867966,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8295103311538696,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8295103311538696,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08771990239620209,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.03695283085107803,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7714988589286804,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7714988589286804,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09617355465888977,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.07209006696939468,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8058497905731201,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8058497905731201,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08292196691036224,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.06345322728157043,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8347777128219604,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8347777128219604,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07960419356822968,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0352453738451004,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7059588432312012,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7059588432312012,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.16124309599399567,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.056596238166093826,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.816972017288208,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.816972017288208,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07982540875673294,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.042865388095378876,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.6776044368743896,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.6776044368743896,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.126485675573349,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.10164694488048553,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8486294746398926,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8486294746398926,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07536640763282776,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.028820624575018883,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7945125102996826,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7945125102996826,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.10417070984840393,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.043939076364040375,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8029695749282837,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8029695749282837,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09399348497390747,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.044916123151779175,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8706949949264526,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8706949949264526,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.06571120023727417,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.026183534413576126,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7383847236633301,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7383847236633301,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11623957008123398,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.062126100063323975,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7888957262039185,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7888957262039185,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11009706556797028,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.037439923733472824,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7004425525665283,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7004425525665283,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11931858956813812,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.09721183031797409,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8294776082038879,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8294776082038879,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08458009362220764,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.040418677031993866,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7442742586135864,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7442742586135864,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.14008541405200958,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05627637729048729,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8072422742843628,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8072422742843628,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.0819166749715805,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05726076662540436,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7380411624908447,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7380411624908447,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.1368872970342636,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05945079028606415,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.815422534942627,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.815422534942627,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07089045643806458,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0609038881957531,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.6526689529418945,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.6526689529418945,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.12699487805366516,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.09632299840450287,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7769399881362915,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7769399881362915,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09982737898826599,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05971699580550194,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.718929648399353,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.718929648399353,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.14479735493659973,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.059381335973739624,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.789432168006897,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.789432168006897,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.08506721258163452,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.0715336948633194,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8442047834396362,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8442047834396362,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08424615859985352,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.03266732022166252,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7030323147773743,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7030323147773743,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.10443253815174103,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.08136837184429169,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8092149496078491,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8092149496078491,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.07464300096035004,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05767803266644478,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7502425909042358,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7502425909042358,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11061066389083862,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0755627453327179,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7841587662696838,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7841587662696838,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.10793150216341019,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.04421626031398773,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.813705325126648,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.813705325126648,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.08691049367189407,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Warts",
+          "confidence": 0.0344671830534935,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.807167649269104,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.807167649269104,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.11630319058895111,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.026059340685606003,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8446688055992126,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8446688055992126,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.060879167169332504,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.03686417266726494,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.8203386068344116,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.8203386068344116,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09634111821651459,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.03086208552122116,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7923333644866943,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7923333644866943,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0905790776014328,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.06981135159730911,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7685942649841309,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7685942649841309,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.09577763825654984,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.05677757412195206,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.702865719795227,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.702865719795227,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.10124114155769348,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.0615050233900547,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.719249427318573,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.719249427318573,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.12109404802322388,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.08027254790067673,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    },
+    {
+      "model_version": "keras-v1",
+      "serving_mode": "ensemble",
+      "predicted_class": "Tinea",
+      "confidence": 0.7510806918144226,
+      "all_predictions": [
+        {
+          "class_name": "Tinea",
+          "confidence": 0.7510806918144226,
+          "risk_level": "low",
+          "clinical_priority": 1
+        },
+        {
+          "class_name": "Atopic",
+          "confidence": 0.12751813232898712,
+          "risk_level": "low",
+          "clinical_priority": 2
+        },
+        {
+          "class_name": "Psoriasis",
+          "confidence": 0.04978022351861,
+          "risk_level": "low",
+          "clinical_priority": 3
+        }
+      ],
+      "medical_warning": null,
+      "requires_urgent_evaluation": false
+    }
+  ],
+  "corpus_sha256": [
+    "9b7d9d891fbb1a003cce6b745a1b48ffbeb148c783e760be1b94a669e3671251",
+    "138c6d637af6a3f2ac0f008bda661f928ec121d5015fb0389837301443835217",
+    "22c4319d92b17c0bdb5e3941613cdb4459ba0435c7ec1e96b2a3b60d32ad7f20",
+    "494ce4d770c1cad1e2487d4df6140c5263f3d95112860df30102bd0e674c606f",
+    "9e8882cc412c4a49844d976820bbb3da5e070935c49b3041bd06c92829daf730",
+    "478c3d08ed2115ba741b7bb63b3988493a7cbaad1ff9ba697b5b2716ff002d1c",
+    "84b57c79df65fe33e9ab3937581bc7f7ee92279ab6ff3280399aa7a8a6f59925",
+    "06fc54f7c7ddc68fa790031ed3a8cf83202aa940d7f8b99d2ea5ad779742c3ac",
+    "a15c33feebf286d2bbbcdf40f40a50e18158861b7fadb6d763d78f790c244264",
+    "2d57d898f6daab52f70b85922cc5a06b004c2fd883fe6f57e02f882a949af52e",
+    "036aba41a22c3e3b180b21bb81d50b0b92101f5b12379c02dea6fd23c96bfe46",
+    "3c32ede7f25fd085f6e45643ba10e3f97f51f6e0e92863491c44ada1c25406f7",
+    "d7376cf8113d9f2141da3eec2c6b8a060efde8c8072de5ce83c690896e0cade4",
+    "d9886d66683d9cf775164e4187779825b21e50f3bd58cbefae60e8ee4ef9c228",
+    "bb921072a3b5de8ed539145d182c5a7fa98b17bbf9b6b405848d8cfe90e9db3c",
+    "5e13689a25fbef4780aaf7aa0489bc53bb1c687b5d3c6baad94c9ee2dc89b341",
+    "82cd9ffd77348fb88f7113c365a24dd8396057fef87987feb58c538691f4ef5a",
+    "3da195229d7c04c460640cc174fa46b7dd2eab7f866f723c58e1ba35ff945182",
+    "9cf17ae1b6808ba52d473f0b12e8ff83b9d064a087263a849795684a866d4d1d",
+    "fa0ecd9154a2bff13974e31a856a1123bc479af18610b02e63010c96bea2fc1b",
+    "35f8221ad4cb1c15c78ad11ba37ccb911b2107def704228ab9f735f351e417d0",
+    "3ae6d667a130cf1330976737f8f086fd222165b0a481402502c0b1710cba9bc6",
+    "d15345b770af508f4caca7e7e2a732ab34b8da85879500fdd3948a6e4a8115be",
+    "1c29d5a17a66035eff775442ff78f10860057d37f4b3b469f31342b79019ad00",
+    "d78d4c50aabcb88a6986b598849e0df64381aac764478f3931246e982ea5f60d",
+    "c3b27fe7446da641a3be5e8bf4cf417c3aa650879e52fd826dfaa96741ece20a",
+    "2737dfdf5ab8f6e7c882053f9758d77f38ba688c939ca1a7b818a2d59555f2b3",
+    "013701ad4ca5c7e63c1a15d2f20bcaa43979fa79e6f8d12a557ec7f1620d691d",
+    "473de418af09b768afd62ab76bdc81d035ff0cc54e756616b5ec1aeffc7eff04",
+    "94da79b2a810ae02077232f8f720768aea57074c626c707dfde2a7c29dab4005",
+    "42caf53c7e1b77350fd69153d2eeb553d6d0bbe207bdd012ac28edf285f7e425",
+    "521fc35e9fcedc35a453677cc9f8d9a29ddf8da95b4801b4df088476380f7b81",
+    "8cf69cd45f8c976075a95aac9a92fa67dbd1afbbd68dedf3b313280346b3d8e7",
+    "4585358aead8b9ff55a46378fd524727b98d1fccdbb97ff2d50217839a069bf0",
+    "b54f5d4e31bf3616d26e015bb042a6eb088cff6ef2ab1ca68782ca3831500681",
+    "a754d7d7e2736cbf3655ef851425fc53aa5fc7d07cea99e23f171edf03577d3d",
+    "57585d3d5f12be79a1e49f0d80158724cf35556df03bcd3f72e8969b0e8906b8",
+    "fa5a6a31f24cfc07ad4c96e96e9b32c4054b9ccecbe8c29416914b45f4fa5910",
+    "dde1badf213ede5696594389fc371777b6b0c5504da188fa020b841ae8c0d872",
+    "4ef0a73c0fd671c45166f3375b0aa82edc2e1174b56013ba877dc73863dda1e0",
+    "7089efdfde90910bc360b8eca452325b1375f73f7cb5742167c9746e57dafd3d",
+    "099b521adfd8076bfc1c1cff229f9f42ff3ff87c720fab50ff0c09a29fbd9681",
+    "3568d101100d352ddf52ce767a402b691ba3ab2846da49d606ee9396bed1413c",
+    "333877155921f9da1adb5bae8fb626ebfefcdba019c46637abbb6ba0e7b4a986",
+    "9024e840e054ed2bd674c313b3b244dc8a8751fafbe2bf3c89e5a1b6a2ea60c9",
+    "7a3d9bfa92354ef00e358ce3f4281cccb5037f7afc10085180e8fd0acc65620e",
+    "cd0947d3ba3825e0501d428a258ac950b13bdc11040205a1261ad8a6d1f0cd07",
+    "12b46e63934fd3bec040e12e1de7b01dc830d3e4b250fd177e14181466a4c217",
+    "174717268ffc4650c0ae74bc182d582c99746bea98eaa2ac9dd6dcba1929fe54",
+    "f0a4f819e1608256af4e01ebc714e1192436c49afb6de6335fa5323698d40bfe"
+  ],
+  "model_sha256": {
+    "final_model2.keras": "4b65bae5c57969faff73024635743146da952eb176dc20cfce6abb8f7a150561",
+    "resultsskinwise\\efficientnet_final.keras": "2b29f733d6ae6875a10e39705e43f67b80f9494b6cff887362cbc5c7aab8ce1a"
+  },
+  "container_memory": "not measured; native RSS is not container memory",
+  "upload_acknowledgement": "not measured by this inference benchmark"
+}
