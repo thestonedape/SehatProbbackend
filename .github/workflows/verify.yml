@@ -18,4 +18,5 @@ jobs:
         env:
           DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
         run: |
+          if [ -n "$DEPLOY_HOOK" ]; then python scripts/check_capacity.py artifacts/container-512m.json; fi
           if [ -n "$DEPLOY_HOOK" ]; then curl --fail --silent --show-error -X POST "$DEPLOY_HOOK"; else echo 'Deployment hook not configured; build verified, no deployment triggered.'; fi
