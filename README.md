@@ -80,7 +80,7 @@ An earlier 100-request burst at concurrency 4 against the original fail-fast adm
 | Status | Evidence |
 |---|---|
 | Implemented | validated bounded API, lifespan model loading/fallback, one inference slot with bounded waiters, versions/checksums, request IDs, rate limits, metrics, Docker/CI, flagged TFLite VGG16 runtime |
-| Measured locally | 20 checks pass; 100 baseline and upgrade real-model inferences; 512 MB container: 100/100 served, 0 OOM; ensemble TFLite parity passed but not adopted |
+| Measured locally | 21 checks pass; 100 baseline and upgrade real-model inferences; 512 MB container: 100/100 served, 0 OOM; ensemble TFLite parity passed but not adopted |
 | Verified live | upgrade not yet deployed/verified |
 | Gate result | **fails the 400 MB margin**: 512 MiB total cgroup peak (426 MiB sampled anonymous memory) under a 512 MB limit. It serves without OOM, but with too little headroom to call it safe on a 512 MB host |
 
